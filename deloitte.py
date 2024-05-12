@@ -17,7 +17,7 @@ for i in range(40,41):
         if j == 1 and len(tables[0]['lines']) == 1: #判断是否需要衔接上一页的表格，衔接的话只需要拓展key_index和value，还要考虑第一行和上表最后一行是不是同一行
           new_keys = [cell['text'] for cell in tables[j]['table_cells'] if cell['start_col'] == 0]
           if new_keys[0] != '' or tables[j]['table_cells'][0]['end_row'] != 0:
-            #一般来说，这种情况下key会空，但53页的情况就不算，这种用end_row != 0排除，虽然可能等于0，但没发现这种情况，也没发现key文字延续了两页的情况，有继续优化的可能
+            #一般来说，这种情况下key会空，但53页的情况就不算，这种用end_row != 0排除，仍需要继续优化
             processed_data[-1]['key_index'].extend(new_keys)
             for row in range(tables[j]['table_rows']):
               new_row_values = [cell['text'] for cell in tables[j]['table_cells'] if cell['start_row'] == row and cell['start_col'] != 0]
